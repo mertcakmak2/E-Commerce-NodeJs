@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.json({limit: '50mb'}))
 
+//Migrations
 const sequelizeOrm = require('./database/DbSync')
 sequelizeOrm.syncDatabase()
 
