@@ -1,4 +1,21 @@
+const mysql = require('mysql')
+
 const sequelizeSync = {
+    createDatabase() {
+        return new Promise((resolve) => {
+            var con = mysql.createConnection({ host: "localhost", user: "root", password: "mertcakmak2" });
+
+            con.connect(function (err) {
+                if (err) throw err;
+                console.log("Connected!");
+                con.query("CREATE DATABASE IF NOT EXISTS ecommerceDb", function (err, result) {
+                    if (err) throw err;
+                    console.log("Database created");
+                    resolve(result)
+                });
+            });
+        })
+    },
     syncDatabase: function () {
         // const User = require('./models/User')
         const Product = require('../models/Product')

@@ -4,7 +4,10 @@ const app = express.Router();
 const Product = require('../models/Product');
 
 app.get('/', (req, res) => {
-    Product.findAll().then(products=>{
+    Product.findAll({
+        attributes: ['id', 'name'],
+        where: { id: 1 }
+    }).then(products => {    //id ve name colonları getirilir.
         res.send(products)
     })
 })
@@ -15,9 +18,9 @@ app.post('/', (req, res) => {
         price: req.body.price,
         categoryId: req.body.categoryId
     }
-    Product.create(product).then(product=>{
+    Product.create(product).then(product => {
         res.send(product)
-    }).catch(err=>{
+    }).catch(err => {
         res.send(err)
     })
 })
