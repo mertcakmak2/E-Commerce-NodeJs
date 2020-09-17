@@ -1,34 +1,26 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../database/DbConnection')
 
-const Product = sequelize.define('product', {
+const Company = sequelize.define('company', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    brand: {
+    name: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    description: {
+    email: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    price: {
+    password: {
         type: Sequelize.STRING,
-        allowNull: false,
-    },
-    stock: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-    },
-    // companyId:{
-    //     type: Sequelize.INTEGER,
-    //     allowNull: false,
-    //     // defaultValue: 1
-    // }
+        allowNull: false
+    }
+    
 })
 
-module.exports = Product
+module.exports = Company

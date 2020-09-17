@@ -20,6 +20,7 @@ const sequelizeSync = {
         // const User = require('./models/User')
         const Product = require('../models/Product')
         const Category = require('../models/Category')
+        const Company = require('../models/Company')
 
         Product.belongsTo(Category, {
             foreignKey: {
@@ -28,11 +29,19 @@ const sequelizeSync = {
         })
         Category.hasMany(Product)
 
-        // User.sequelize.sync({force:true}).then(res => {
+        Product.belongsTo(Company, {
+            foreignKey: {
+                allowNull: false
+            },
+        })
+        Company.hasMany(Product)
+
+        // User.sequelize.sync().then(res => {
         //     console.log(res)
         // })
+
         Product.sequelize.sync().then(res => {   //sync({ force: true }) || sync({ alter: true })
-            console.log(res)
+            // console.log(res)
         })
         Category.sequelize.sync().then(res => {  //sync({ force: true }) || sync({ alter: true })
             Category.count().then(count => {
@@ -44,7 +53,17 @@ const sequelizeSync = {
                     ])
                 }
             })
-            console.log(res)
+            // console.log(res)
+        })
+        Company.sequelize.sync().then(res => {   //sync({ force: true }) || sync({ alter: true })
+            Company.count().then(count => { 
+                if (count === 0) {
+                    Company.bulkCreate([
+                        { name: 'Lighter', email: 'mertcakmak2@gmail.com', password: "616161" },
+                    ])
+                }
+                // console.log(res)
+            })
         })
     }
 }
