@@ -3,6 +3,7 @@ const app = express.Router();
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op;
 
+//MAİN MODEL
 const Product = require('../models/Product');
 
 //JOIN MODEL
@@ -25,6 +26,7 @@ app.post('/', (req, res) => {
         res.send(err)
     })
 })
+
 
 //GET ALL PRODUCT
 app.get('/', (req, res) => {
@@ -73,7 +75,7 @@ app.get('/search/:query', (req, res) => {
     Product.findAll({
         where: {
             description: {
-                [Op.like]: '%'+query+'%'    //Gelen stringe göre ürün arama
+                [Op.like]: '%' + query + '%'    //Gelen stringe göre ürün arama
             }
         },
     }).then(products => {
@@ -84,26 +86,10 @@ app.get('/search/:query', (req, res) => {
 
 //UPDATE PRODUCT
 //DELETE PRODUCT
-
-
-
-
-
-
-app.get('/byCategory', (req, res) => {
-    Product.findAll({
-        include: [Category] // Join atarak çekilen ürünlerin kategorisini de getiriyor
-    }).then(products => {
-        res.send(products)
-    })
+app.delete('/:id', (req, res) => {
+    var productId = req.params.id
+    res.send("deleete "+productId)
 })
 
-app.get('/byCompany', (req, res) => {
-    Product.findAll({
-        include: [Company] // Join atarak çekilen ürünlerin companysini de getiriyor
-    }).then(products => {
-        res.send(products)
-    })
-})
 
 module.exports = app;
