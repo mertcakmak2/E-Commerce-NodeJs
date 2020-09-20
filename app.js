@@ -4,10 +4,13 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.json({ limit: '50mb' }))
 
+//Mongo
+const mongoDb = require('./database/MongoDbConnect')
 //Migrations
-const sequelizeOrm = require('./database/DbSync')
-sequelizeOrm.createDatabase().then((res) => {
-    sequelizeOrm.syncDatabase()
+const database = require('./database/DbSync')
+database.createDatabase().then((res) => {
+    database.syncDatabase()
+    mongoDb.connect()
 })
 
 //Api's

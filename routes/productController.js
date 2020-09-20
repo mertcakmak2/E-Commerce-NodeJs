@@ -83,12 +83,20 @@ app.get('/search/:query', (req, res) => {
     })
 })
 
+const Adress = require('../MongoDbModels/adress')
+app.post('/mongo/add', (req, res) => {
+    var adress = new Adress(req.body.name)
+    adress.save().then(result=>{
+        res.send(result)
+    })
+})
+
 
 //UPDATE PRODUCT
 //DELETE PRODUCT
 app.delete('/:id', (req, res) => {
     var productId = req.params.id
-    res.send("deleete "+productId)
+    res.send("deleete " + productId)
 })
 
 

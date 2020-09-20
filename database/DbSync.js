@@ -1,6 +1,6 @@
 const mysql = require('mysql')
 
-const sequelizeSync = {
+const database = {
     createDatabase() {
         return new Promise((resolve) => {
             var con = mysql.createConnection({ host: "localhost", user: "root", password: "mertcakmak2" });
@@ -68,4 +68,4 @@ const sequelizeSync = {
     }
 }
 
-module.exports = sequelizeSync
+module.exports = database
